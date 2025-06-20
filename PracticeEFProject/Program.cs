@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using PracticeEFProject.Data;
+
 namespace PracticeEFProject
 {
     public class Program
@@ -8,6 +11,10 @@ namespace PracticeEFProject
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDB"))
+                );
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
